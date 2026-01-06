@@ -1,4 +1,5 @@
 package com.icebank.model;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 //@Data : using lombok, you won't need to create the getters and setters with the constructute
@@ -6,6 +7,7 @@ import jakarta.persistence.*;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     private String name;
