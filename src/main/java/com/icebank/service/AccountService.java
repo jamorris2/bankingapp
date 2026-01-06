@@ -1,6 +1,7 @@
 package com.icebank.service;
 
 import com.icebank.model.Account;
+import com.icebank.model.AccountRequestDTO;
 import com.icebank.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Account updateAccount(Long id, Account updatedAccount) {
+    public Account updateAccount(Long id, AccountRequestDTO updatedAccount) {
         return accountRepository.findById(id)
                 .map(account -> {
                     account.setName(updatedAccount.getName());

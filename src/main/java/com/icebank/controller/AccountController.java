@@ -1,6 +1,7 @@
 package com.icebank.controller;
 
 import com.icebank.model.Account;
+import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account account) {
+    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody AccountRequestDTO account) {
         Account updatedAccount = accountService.updateAccount(id, account);
         if (updatedAccount == null) {
             return ResponseEntity.notFound().build();
