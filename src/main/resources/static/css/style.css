@@ -1,6 +1,6 @@
 h1 {
-    font-family: sans-serif; /* Optional: Makes it look cleaner */
-    margin-top: 50px;       /* Optional: Gives it some space from the top */
+    font-family: sans-serif;
+    margin-top: 50px;
 }
 
 h1, p {
@@ -8,7 +8,6 @@ h1, p {
     text-align: center;
 }
 
-/* This styles the entire body to center content */
 body {
     background-color: #0067ff;
     display: flex;
@@ -17,14 +16,33 @@ body {
     text-align: center;
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 5px; /* Adds space so text doesn't touch the screen edges */
+    padding: 5px;
 }
 
-/* This makes the image responsive */
 img {
-    /*width: 100px;    !* Limits the logo to 80% of the screen width *!*/
-    max-width: 20%;    /* Limits the logo to 80% of the screen width */
-    height: auto;      /* Keeps the image from looking stretched */
+    max-width: 20%;
+    height: auto;
     display: block;
-    margin: 20px auto; /* Centers the image and adds vertical spacing */
+    margin: 20px auto;
+}
+
+.large-input {
+    box-sizing: border-box;
+    display: block;
+    margin: 20px auto;
+
+    width: 90%;
+    max-width: 320px;
+
+    padding: 14px 16px;
+    font-size: 16px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.large-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
