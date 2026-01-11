@@ -7,12 +7,16 @@
     </head>
 
     <body>
-        <h1>IceBank</h1>
-        <img th:src="@{/images/icebank_logo.png}" alt="IceBank Logo">
-        <input type="tel"
-               class="large-input"
-               placeholder="User ID"
-               pattern="[0-9]*"
-               inputmode="numeric">
+        <div class="login-container">
+            <h1>IceBank</h1>
+            <img th:src="@{/images/icebank_logo.png}" alt="IceBank Logo">
+            <input type="tel"
+                   class="large-input"
+                   placeholder="User ID"
+                   pattern="[0-9]*"
+                   inputmode="numeric">
+
+            <button type="submit" class="btn-primary">Log in</button>
+        </div>
     </body>
 </html>
