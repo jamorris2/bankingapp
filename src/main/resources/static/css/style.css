@@ -24,14 +24,17 @@ body {
 
 /* --- Elements --- */
 img {
-    max-width: 80px;
+    max-width: 120px;
     height: auto;
-    margin: 20px auto;
+    margin: 10px auto;
+
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
 }
 
 .large-input {
     width: 100%;
     padding: 14px;
+    margin-top: 20px;
     margin-bottom: 15px;
     font-size: 16px;
     border: 1px solid #ccc;
