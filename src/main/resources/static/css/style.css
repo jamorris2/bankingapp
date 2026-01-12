@@ -19,6 +19,8 @@ body {
     width: 90%;
     max-width: 400px;
     margin: 0 auto;
+
+    min-height: 100dvh
 }
 
 img {
@@ -34,6 +36,7 @@ img {
     font-size: 16px;
     border: 1px solid #ccc;
     outline: none;
+    -webkit-appearance: none;
 }
 
 .large-input:focus {
@@ -45,20 +48,39 @@ img {
     background-color: #f59c24;
     color: white;
     border: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
 }
 
 .btn-primary:active {
     transform: translateY(1px);
 }
 
-.large-input, .btn-primary {
+.btn-secondary {
+    background-color: white;
+    color: #333;
+    border: 2px solid #ffffff;
+
+    /* This pushes the button to the bottom of the container */
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.btn-secondary:active {
+    background-color: #f0f0f0;
+    transform: translateY(1px);
+}
+
+.large-input, .btn-primary, .btn-secondary {
     width: 100%;
     box-sizing: border-box;
     padding: 12px;
     border-radius: 5px;
+}
+
+.btn-primary, .btn-secondary {
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    user-select: none;
 }
