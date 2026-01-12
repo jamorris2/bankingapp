@@ -1,15 +1,14 @@
-
+/* --- Base Styles --- */
 body {
     background-color: #0067ff;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    padding: 5px;
-
-    color: white
+    padding: 0;
+    color: white;
 }
 
 .login-container {
@@ -18,69 +17,63 @@ body {
     align-items: center;
     width: 90%;
     max-width: 400px;
-    margin: 0 auto;
-
-    min-height: 100dvh
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    box-sizing: border-box;
+    padding: 20px 0;
 }
 
+/* --- Elements --- */
 img {
-    max-width: 20%;
+    max-width: 80px;
     height: auto;
-    display: block;
     margin: 20px auto;
 }
 
 .large-input {
-    display: block;
-    margin: 20px auto;
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
     font-size: 16px;
     border: 1px solid #ccc;
+    border-radius: 8px;
     outline: none;
+    box-sizing: border-box;
     -webkit-appearance: none;
 }
 
-.large-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+/* --- THE BASE BUTTON CLASS --- 
+   This handles sizing, text, and behavior for ALL buttons
+*/
+.btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    user-select: none;
+    display: block;
+    text-decoration: none;
 }
 
+.btn:active {
+    transform: scale(0.98); /* Makes it feel like a real button press */
+}
+
+/* --- BUTTON VARIANTS --- */
 .btn-primary {
     background-color: #f59c24;
     color: white;
-    border: none;
-}
-
-.btn-primary:active {
-    transform: translateY(1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {
     background-color: white;
     color: #333;
-    border: 2px solid #ffffff;
-
-    /* This pushes the button to the bottom of the container */
-    margin-top: auto;
+    margin-top: auto; /* Pushes to bottom of container */
     margin-bottom: 20px;
-}
-
-.btn-secondary:active {
-    background-color: #f0f0f0;
-    transform: translateY(1px);
-}
-
-.large-input, .btn-primary, .btn-secondary {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-    border-radius: 5px;
-}
-
-.btn-primary, .btn-secondary {
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-    user-select: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
