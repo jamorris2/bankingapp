@@ -1,0 +1,82 @@
+/* --- Base Styles --- */
+body {
+    background-color: #0067ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    box-sizing: border-box;
+    padding: 20px 0;
+}
+
+/* --- Elements --- */
+img {
+    max-width: 120px;
+    height: auto;
+    margin: 10px auto;
+
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+}
+
+.large-input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+/* --- THE BASE BUTTON CLASS --- 
+   This handles sizing, text, and behavior for ALL buttons
+*/
+.btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+    user-select: none;
+    display: block;
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.98); /* Makes it feel like a real button press */
+}
+
+/* --- BUTTON VARIANTS --- */
+.btn-primary {
+    background-color: #f59c24;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background-color: white;
+    color: #333;
+    margin-top: auto; /* Pushes to bottom of container */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
