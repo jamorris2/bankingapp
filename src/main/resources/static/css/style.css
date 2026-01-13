@@ -22,6 +22,12 @@ body {
     padding: 20px 0;
 }
 
+.auth-form {
+    width: 100%;
+    max-width: 400px; /* This keeps the form from getting too wide on desktop */
+    margin: 0 auto;   /* This centers the form horizontally */
+}
+
 /* --- Elements --- */
 img {
     max-width: 120px;
