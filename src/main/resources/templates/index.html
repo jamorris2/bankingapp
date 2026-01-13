@@ -9,8 +9,7 @@
 
     <body>
         <div class="auth-container">
-            <h1>IceBank</h1>
-            <img th:src="@{/images/icebank_logo.png}" alt="IceBank Logo">
+            <div th:replace="~{fragments :: auth-header}"></div>
 
             <form th:action="@{/login}" method="post" class="auth-form">
                 <input type="text"
