@@ -11,7 +11,7 @@ body {
     color: white;
 }
 
-.login-container {
+.auth-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,11 +22,17 @@ body {
     padding: 20px 0;
 }
 
+.auth-form {
+    width: 100%;
+    max-width: 400px; /* This keeps the form from getting too wide on desktop */
+    margin: 0 auto;   /* This centers the form horizontally */
+}
+
 /* --- Elements --- */
 img {
     max-width: 120px;
     height: auto;
-    margin: 10px auto;
+    margin-bottom: 20px;
 
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
 }
@@ -34,8 +40,7 @@ img {
 .large-input {
     width: 100%;
     padding: 14px;
-    margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
