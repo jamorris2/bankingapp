@@ -9,9 +9,9 @@
     <div class="auth-container">
         <div th:replace="~{fragments :: auth-header}"></div>
 
-        <form th:action="@{/signup}" method="post" class="auth-form">
-            <input type="text" name="fullName" class="large-input" placeholder="Name" required>
-            <input type="email" name="email" class="large-input" placeholder="Email" required>
+        <form th:action="@{/signup}" th:object="${accountRequest}" method="post" class="auth-form">
+            <input type="text" th:field="*{name}" class="large-input" placeholder="Name" required>
+            <input type="email" th:field="*{email}" class="large-input" placeholder="Email" required>
             <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
 
