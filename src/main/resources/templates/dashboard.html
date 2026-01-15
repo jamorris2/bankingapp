@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>IceBank - Dashboard</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+    <body>
+        <div class="page-container">
+            <div class="user-info">
+                <strong th:text="${userAccount.name}">User Name</strong><br>
+                <small>ID: <span th:text="${userAccount.id}">0</span></small>
+            </div>
+        </div>
+    </body>
 </html>

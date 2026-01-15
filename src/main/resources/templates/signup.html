@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="auth-container">
+    <div class="page-container">
         <div th:replace="~{fragments :: auth-header}"></div>
 
         <form th:action="@{/signup}" th:object="${accountRequest}" method="post" class="auth-form">

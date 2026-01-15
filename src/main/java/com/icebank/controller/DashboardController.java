@@ -14,18 +14,13 @@ public class DashboardController {
     @Autowired
     private AccountService accountService;
 
-//    @GetMapping("/dashboard/{id}")
-//    public String showDashboard(@PathVariable Long id, Model model) {
-//        // Fetch the account from the database
-//        Account account = accountService.getAccountById(id)
-//                .orElseThrow(() -> new RuntimeException("Account not found with ID: " + id));
-//
-//        model.addAttribute("userAccount", account);  // Add the account object to the UI model
-//        return "dashboard"; // This tells Spring to look for dashboard.html
-//    }
+    @GetMapping("/dashboard/{id}")
+    public String showDashboard(@PathVariable Long id, Model model) {
+        // Fetch the account from the database
+        Account account = accountService.getAccountById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found with ID: " + id));
 
-    @GetMapping("/dashboard")
-    public String showDashboard() {
-        return "dashboard"; // This looks for dashboard.html
+        model.addAttribute("userAccount", account);  // Add the account object to the UI model
+        return "dashboard"; // This tells Spring to look for dashboard.html
     }
 }
