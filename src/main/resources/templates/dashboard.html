@@ -12,6 +12,11 @@
                 <strong th:text="${userAccount.name}">User Name</strong><br>
                 <small>ID: <span th:text="${userAccount.id}">0</span></small>
             </div>
+
+            <div class="balance">
+                <p>Balance</p>
+                <h1>$<span th:text="${userAccount.balance}">0</span></h1>
+            </div>
         </div>
     </body>
 </html>

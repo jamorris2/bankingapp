@@ -55,6 +55,22 @@ img {
     margin-left: auto;
 }
 
+.balance {
+    width: auto;
+    text-align: left;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.balance p {
+    margin: 0;
+}
+
+.balance h1 {
+    margin-top: 5px;
+}
+
+
 /* --- THE BASE BUTTON CLASS --- 
    This handles sizing, text, and behavior for ALL buttons
 */
