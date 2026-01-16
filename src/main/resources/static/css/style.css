@@ -74,10 +74,8 @@ img {
 /* --- THE BASE BUTTON CLASS --- 
    This handles sizing, text, and behavior for ALL buttons
 */
+
 .btn {
-    width: 100%;
-    padding: 14px;
-    font-size: 1.1rem;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
@@ -106,4 +104,18 @@ img {
     margin-top: auto; /* Pushes to bottom of container */
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-big {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+}
+
+.btn-small {
+    padding: 8px;
+}
+
+.transfer-btn {
+    margin-left: auto;
 }
