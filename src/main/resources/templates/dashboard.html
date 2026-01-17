@@ -7,6 +7,12 @@
         <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
+        <header class="toolbar">
+            <div class="toolbar-content">
+                <h1 class="m-0">IceBank</h1>
+            </div>
+        </header>
+
         <div class="page-container">
             <div class="user-info">
                 <strong th:text="${userAccount.name}">User Name</strong><br>
@@ -14,8 +20,8 @@
             </div>
 
             <div class="balance">
-                <p>Balance</p>
-                <h1>$<span th:text="${userAccount.balance}">0</span></h1>
+                <p class="m-0">Balance</p>
+                <h1>$<span th:text="${#numbers.formatDecimal(userAccount.balance, 1, 'DEFAULT', 2, 'DEFAULT')}">0.00</span></h1>
             </div>
 
             <button class="btn btn-small transfer-btn">Transfer</button>

@@ -62,10 +62,6 @@ img {
     margin-top: 20px;
 }
 
-.balance p {
-    margin: 0;
-}
-
 .balance h1 {
     margin-top: 5px;
 }
@@ -119,3 +115,23 @@ img {
 .transfer-btn {
     margin-left: auto;
 }
+
+.toolbar {
+    width: 100%;
+    background-color: #f59c24; /* Light grey background from mockup */
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    color: white; /* Dark text for the header */
+}
+
+.toolbar-content {
+    display: flex;
+    justify-content: center; /* Centers the logo */
+    align-items: center;
+    position: relative; /* Allows us to absolute position the logout button */
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.m-0 { margin: 0; }
