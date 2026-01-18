@@ -11,7 +11,7 @@ body {
     color: white;
 }
 
-.auth-container {
+.page-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +29,7 @@ body {
 }
 
 /* --- Elements --- */
-img {
+.logo {
     max-width: 120px;
     height: auto;
     margin-bottom: 20px;
@@ -49,13 +49,29 @@ img {
     -webkit-appearance: none;
 }
 
+.user-info {
+    width: auto;
+    text-align: right;
+    margin-left: auto;
+}
+
+.balance {
+    width: auto;
+    text-align: left;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.balance h1 {
+    margin-top: 5px;
+}
+
+
 /* --- THE BASE BUTTON CLASS --- 
    This handles sizing, text, and behavior for ALL buttons
 */
+
 .btn {
-    width: 100%;
-    padding: 14px;
-    font-size: 1.1rem;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
@@ -84,4 +100,44 @@ img {
     margin-top: auto; /* Pushes to bottom of container */
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-big {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+}
+
+.btn-small {
+    padding: 8px;
+}
+
+.transfer-btn {
+    margin-left: auto;
+}
+
+.toolbar {
+    width: 100%;
+    background-color: #f59c24;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    color: white; /* Dark text for the header */
+}
+
+.toolbar-content {
+    display: flex;
+    justify-content: center; /* Centers the logo */
+    align-items: center;
+    position: relative; /* Allows to absolute position the logout button */
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.m-0 { margin: 0; }
+
+.logout-btn {
+    height: 35px;
+    position: absolute;
+    right: 20px;
 }

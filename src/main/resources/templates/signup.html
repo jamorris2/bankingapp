@@ -6,16 +6,16 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <div class="auth-container">
+    <div class="page-container">
         <div th:replace="~{fragments :: auth-header}"></div>
 
         <form th:action="@{/signup}" th:object="${accountRequest}" method="post" class="auth-form">
             <input type="text" th:field="*{name}" class="large-input" placeholder="Name" required>
             <input type="email" th:field="*{email}" class="large-input" placeholder="Email" required>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary btn-big">Sign Up</button>
         </form>
 
-        <a th:href="@{/login}" class="btn btn-secondary">Already Have an Account?</a>
+        <a th:href="@{/login}" class="btn btn-secondary btn-big">Already Have an Account?</a>
     </div>
 </body>
 </html>
