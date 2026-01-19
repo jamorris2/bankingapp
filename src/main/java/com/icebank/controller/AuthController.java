@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthController {
@@ -43,5 +44,11 @@ public class AuthController {
 
         // Redirect to login with a success parameter
         return "redirect:/login?success";
+    }
+
+    @PostMapping("/processLogin")
+    public String handleLogin(@RequestParam("userID") String userID) {
+        // Add validation logic here later
+        return "redirect:/dashboard/" + userID;
     }
 }
