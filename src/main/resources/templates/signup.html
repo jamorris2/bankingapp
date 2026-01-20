@@ -10,8 +10,8 @@
         <div th:replace="~{fragments :: auth-header}"></div>
 
         <form th:action="@{/signup}" th:object="${accountRequest}" method="post" class="auth-form">
-            <input type="text" th:field="*{name}" class="large-input" placeholder="Name" required>
-            <input type="email" th:field="*{email}" class="large-input" placeholder="Email" required>
+            <input type="text" th:field="*{name}" class="large-input mb-20" placeholder="Name" required>
+            <input type="email" th:field="*{email}" class="large-input mb-20" placeholder="Email" required>
             <button type="submit" class="btn btn-primary btn-big">Sign Up</button>
         </form>
 
