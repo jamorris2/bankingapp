@@ -7,12 +7,7 @@
         <link rel="stylesheet" th:href="@{/css/style.css}">
     </head>
     <body>
-        <header class="toolbar">
-            <div class="toolbar-content">
-                <h1 class="m-0">IceBank</h1>
-                <img class="logout-btn" th:src="@{/images/logout_btn.png}" alt="Logout Button">
-            </div>
-        </header>
+        <div th:replace="~{fragments :: toolbar-header}"></div>
 
         <div class="page-container">
             <div class="user-info">
@@ -25,7 +20,7 @@
                 <h1>$<span th:text="${#numbers.formatDecimal(userAccount.balance, 1, 'DEFAULT', 2, 'DEFAULT')}">0.00</span></h1>
             </div>
 
-            <button class="btn btn-small transfer-btn">Transfer</button>
+            <a th:href="@{/transfer}" class="btn btn-small transfer-btn btn-secondary push-right">Transfer</a>
         </div>
     </body>
 </html>

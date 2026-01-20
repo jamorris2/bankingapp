@@ -23,4 +23,9 @@ public class DashboardController {
         model.addAttribute("userAccount", account);  // Add the account object to the UI model
         return "dashboard"; // This tells Spring to look for dashboard.html
     }
+
+    @GetMapping("/transfer")
+    public String showTransferPage() {
+        return "transfer"; // This looks for transfer.html
+    }
 }
