@@ -3,6 +3,7 @@ package com.icebank.controller;
 import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,8 +48,14 @@ public class AuthController {
     }
 
     @PostMapping("/processLogin")
-    public String handleLogin(@RequestParam("userID") String userID) {
-        // Add validation logic here later
-        return "redirect:/dashboard/" + userID;
+    public String handleLogin(@RequestParam("userID") Long userID, HttpSession session) {
+        session.setAttribute("currentUserId", userID);
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
     }
 }
