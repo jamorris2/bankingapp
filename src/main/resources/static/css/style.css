@@ -6,6 +6,7 @@ body {
     align-items: center;
     text-align: center;
     font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100dvh;
     margin: 0;
     padding: 0;
     color: white;
@@ -17,7 +18,7 @@ body {
     align-items: center;
     width: 90%;
     max-width: 400px;
-    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    flex-grow: 1;
     box-sizing: border-box;
     padding: 20px 0;
 }
@@ -40,7 +41,6 @@ body {
 .large-input {
     width: 100%;
     padding: 14px;
-    margin-bottom: 20px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -66,6 +66,62 @@ body {
     margin-top: 5px;
 }
 
+.input-transfer-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px; /* Moves the margin-bottom from the input to the container */
+}
+
+/* The $ symbol */
+.currency-prefix {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333; /* Dark gray for the symbol */
+    font-weight: bold;
+    pointer-events: none; /* User can click "through" the symbol to focus the input */
+}
+
+.toggle-container {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.toggle-radio {
+    display: none;
+}
+
+.toggle-label {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #0067ff;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+}
+
+.toggle-label:hover {
+    background-color: #f8f8f8;
+}
+
+.toggle-radio:checked + .toggle-label {
+    background-color: #f59c24;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 /* --- THE BASE BUTTON CLASS --- 
    This handles sizing, text, and behavior for ALL buttons
@@ -97,8 +153,6 @@ body {
 .btn-secondary {
     background-color: white;
     color: #333;
-    margin-top: auto; /* Pushes to bottom of container */
-    margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -112,10 +166,15 @@ body {
     padding: 8px;
 }
 
-.transfer-btn {
-    margin-left: auto;
+.logout-btn {
+    height: 35px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
+/* --- TOOLBAR --- */
 .toolbar {
     width: 100%;
     background-color: #f59c24;
@@ -134,10 +193,36 @@ body {
     padding: 0 20px;
 }
 
-.m-0 { margin: 0; }
+/* --- MISC --- */
+.m-0 {
+    margin: 0;
+}
 
-.logout-btn {
-    height: 35px;
-    position: absolute;
-    right: 20px;
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-70 {
+    margin-bottom: 70px;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.pl-30 {
+    padding-left: 30px;
+}
+
+.push-right {
+    margin-left: auto;
+}
+
+.push-bottom {
+    margin-top: auto;
+    margin-bottom: 20px;
 }

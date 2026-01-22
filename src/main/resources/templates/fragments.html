@@ -7,5 +7,14 @@
         <img class="logo" th:src="@{/images/icebank_logo.png}" alt="IceBank Logo">
     </div>
 
+    <header th:fragment="toolbar-header" class="toolbar">
+        <div class="toolbar-content">
+            <h1 class="m-0">IceBank</h1>
+            <a th:href="@{/logout}">
+                <img class="logout-btn" th:src="@{/images/logout_btn.png}" alt="Logout">
+            </a>
+        </div>
+    </header>
+
 </body>
 </html>

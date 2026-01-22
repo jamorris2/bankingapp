@@ -14,7 +14,7 @@
             <form th:action="@{/processLogin}" method="post" class="auth-form">
                 <input type="text"
                        name="userID"
-                       class="large-input"
+                       class="large-input mb-20"
                        placeholder="User ID"
                        pattern="[0-9]*"
                        inputmode="numeric"
@@ -23,7 +23,7 @@
                 <button type="submit" class="btn btn-primary btn-big">Log In</button>
             </form>
 
-            <a th:href="@{/signup}" class="btn btn-secondary btn-big">Create New Account</a>
+            <a th:href="@{/signup}" class="btn btn-secondary btn-big push-bottom">Create New Account</a>
         </div>
     </body>
 </html>

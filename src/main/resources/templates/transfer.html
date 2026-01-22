@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>IceBank - Transfer</title>
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+
+    <body>
+        <div th:replace="~{fragments :: toolbar-header}"></div>
+        <div class="page-container">
+            <h1 class="mt-0 mb-70">Transfer Money</h1>
+
+    <!--        <form th:action="@{/processLogin}" method="post" class="auth-form">-->
+            <div class="input-transfer-container">
+                <span class="currency-prefix">$</span>
+                <input type="number"
+                       name="transferAmount"
+                       class="large-input pl-30"
+                       placeholder="0.00"
+                       step="0.01"
+                       min="0"
+                       inputmode="decimal"
+                       required>
+            </div>
+
+            <div class="toggle-container">
+                <input type="radio" id="in" name="transferType" value="IN" checked class="toggle-radio">
+                <label for="in" class="toggle-label label-left">TRANSFER IN</label>
+
+                <input type="radio" id="out" name="transferType" value="OUT" class="toggle-radio">
+                <label for="out" class="toggle-label label-right">TRANSFER OUT</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-big">Transfer Money</button>
+    <!--        </form>-->
+        </div>
+    </body>
+</html>

@@ -1,51 +1,31 @@
 package com.icebank.controller;
 
 import com.icebank.model.Account;
-import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/accounts")
+@Controller
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
-    @GetMapping
-    public List<Account> getAllAccounts() {
-        return accountService.getAllAccounts();
+    @GetMapping("/dashboard/{id}")
+    public String showDashboard(@PathVariable Long id, Model model) {
+        // Fetch the account from the database
+        Account account = accountService.getAccountById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found with ID: " + id));
+
+        model.addAttribute("userAccount", account);  // Add the account object to the UI model
+        return "dashboard"; // This tells Spring to look for dashboard.html
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Account> getAccountById(@PathVariable Long id) {
-        return accountService.getAccountById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public Account createAccount(@RequestBody Account account) {
-        return accountService.saveAccount(account);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody AccountRequestDTO account) {
-        Account updatedAccount = accountService.updateAccount(id, account);
-        if (updatedAccount == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(updatedAccount);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
-        accountService.deleteAccount(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/transfer")
+    public String showTransferPage() {
+        return "transfer"; // This looks for transfer.html
     }
 }
