@@ -5,12 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>IceBank - Transfer</title>
         <link rel="stylesheet" th:href="@{/css/style.css}">
+        <script th:src="@{/js/transfer.js}"></script>
     </head>
 
     <body>
         <div th:replace="~{fragments :: toolbar-header}"></div>
         <div class="page-container">
-            <h1 class="mt-0 mb-70">Transfer Money</h1>
+            <h1 class="mt-0 mb-35">Transfer Money</h1>
+
+            <p class="push-left">
+                Current Balance: <strong th:text="${#numbers.formatCurrency(userAccount.balance)}">$0.00</strong>
+            </p>
 
             <form th:action="@{/processTransfer}" method="post" class >
                 <div class="input-transfer-container">
@@ -35,5 +40,15 @@
                 <button type="submit" class="btn btn-primary btn-big">Transfer Money</button>
             </form>
         </div>
+
+        <div id="errorPopup" class="popup-overlay" style="display: none;">
+            <div class="popup-content">
+                <div class="error-icon">!</div>
+                <h3>Insufficient Funds</h3>
+                <p>You don't have enough money in your balance to complete this transfer.</p>
+                <button onclick="closePopup()" class="btn btn-primary btn-big">Got it</button>
+            </div>
+        </div>
+
     </body>
 </html>

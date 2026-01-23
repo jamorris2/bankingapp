@@ -30,8 +30,14 @@ public class AccountController {
 
 
     @GetMapping("/transfer")
-    public String showTransferPage(HttpSession session) {
-        if (session.getAttribute("currentUserId") == null) return "redirect:/login";
+    public String showTransferPage(HttpSession session, Model model) {
+        Long id = (Long) session.getAttribute("currentUserId");
+        if (id == null) return "redirect:/login";
+
+        Account account = accountService.getAccountById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        model.addAttribute("userAccount", account);
 
         return "transfer";
     }
