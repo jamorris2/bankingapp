@@ -9,7 +9,10 @@
 
     <header th:fragment="toolbar-header" class="toolbar">
         <div class="toolbar-content">
+            <a th:if="${showBack}" th:href="@{/dashboard}" class="back-btn">&#10094;</a>
+
             <h1 class="m-0">IceBank</h1>
+
             <a th:href="@{/logout}">
                 <img class="logout-btn" th:src="@{/images/logout_btn.png}" alt="Logout">
             </a>
