@@ -2,6 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
+    <head th:fragment="header-files">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" th:href="@{/images/icebank_logo.png}">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+
     <div th:fragment="auth-header">
         <h1>IceBank</h1>
         <img class="logo" th:src="@{/images/icebank_logo.png}" alt="IceBank Logo">
