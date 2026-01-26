@@ -2,7 +2,6 @@ package com.icebank.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
-//@Data : using lombok, you won't need to create the getters and setters with the constructute
 @Entity
 public class Account {
     @Id

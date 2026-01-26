@@ -18,7 +18,6 @@ public class AuthController {
     @Autowired
     private AccountService accountService;
 
-    // The "default" page
     @GetMapping("/")
     public String index() {
         return "redirect:/login";
@@ -26,13 +25,13 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "login"; // This looks for login.html
+        return "login";  // looks for login.html
     }
 
     @GetMapping("/signup")
     public String showSignupPage(Model model) {
         model.addAttribute("accountRequest", new AccountRequestDTO());
-        return "signup"; // This looks for signup.html
+        return "signup";
     }
 
     @PostMapping("/signup")
@@ -43,7 +42,6 @@ public class AuthController {
 
         accountService.saveAccount(account);
 
-        // Redirect to login with a success parameter
         return "redirect:/login?success";
     }
 

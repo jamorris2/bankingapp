@@ -25,8 +25,8 @@ body {
 
 form {
     width: 100%;
-    max-width: 400px; /* This keeps the form from getting too wide on desktop */
-    margin: 0 auto;   /* This centers the form horizontally */
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 /* --- Elements --- */
@@ -70,7 +70,7 @@ form {
     position: relative;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 20px; /* Moves the margin-bottom from the input to the container */
+    margin-bottom: 20px;
 }
 
 /* The $ symbol */
@@ -79,9 +79,9 @@ form {
     left: 14px;
     top: 50%;
     transform: translateY(-50%);
-    color: #333; /* Dark gray for the symbol */
+    color: #333;
     font-weight: bold;
-    pointer-events: none; /* User can click "through" the symbol to focus the input */
+    pointer-events: none;
 }
 
 .toggle-container {
@@ -123,10 +123,9 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* --- THE BASE BUTTON CLASS --- 
-   This handles sizing, text, and behavior for ALL buttons
-*/
 
+/* --- THE BASE BUTTON CLASS ---
+*/
 .btn {
     font-weight: bold;
     border-radius: 8px;
@@ -140,7 +139,7 @@ form {
 }
 
 .btn:active {
-    transform: scale(0.98); /* Makes it feel like a real button press */
+    transform: scale(0.98);
 }
 
 /* --- BUTTON VARIANTS --- */
@@ -196,14 +195,14 @@ form {
     background-color: #f59c24;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
-    color: white; /* Dark text for the header */
+    color: white;
 }
 
 .toolbar-content {
     display: flex;
-    justify-content: center; /* Centers the logo */
+    justify-content: center;
     align-items: center;
-    position: relative; /* Allows to absolute position the logout button */
+    position: relative;
     max-width: 400px;
     margin: 0 auto;
     padding: 0 20px;
@@ -218,7 +217,7 @@ form {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Transparent black */
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;

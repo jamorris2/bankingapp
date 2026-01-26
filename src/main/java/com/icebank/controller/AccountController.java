@@ -59,7 +59,6 @@ public class AccountController {
             if (account.getBalance() >= amount) {
                 account.setBalance(account.getBalance() - amount);
             } else {
-                // Optional: Handle insufficient funds (maybe redirect with error)
                 return "redirect:/transfer?error=insufficient_funds";
             }
         }
