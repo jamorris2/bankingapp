@@ -9,9 +9,17 @@ public class Account {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    private String name;
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    private boolean verified = false;
+    private String name;
     private double balance;
+
+    public Account() {}
 
     // Getters and Setters
     public Long getId() {
@@ -44,5 +52,21 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 }
