@@ -3,6 +3,7 @@ package com.icebank.controller;
 import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
+import com.icebank.service.EmailService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class AuthController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
@@ -42,11 +46,15 @@ public class AuthController {
         Account account = new Account();
         account.setName(dto.getName());
         account.setEmail(dto.getEmail());
-
-        String encodedPassword = passwordEncoder.encode(dto.getPassword());
-        account.setPassword(encodedPassword);
-
+        account.setPassword(passwordEncoder.encode(dto.getPassword()));
         accountService.saveAccount(account);
+
+        try {
+            emailService.sendVerificationEmail(account.getEmail(), "dev-token-123");
+        } catch (Exception e) {
+            System.out.println("Mail failed but user saved: " + e.getMessage());
+        }
+
         return "redirect:/login?success";
     }
 
