@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Controller
 public class AuthController {
 
@@ -47,10 +50,13 @@ public class AuthController {
         account.setName(dto.getName());
         account.setEmail(dto.getEmail());
         account.setPassword(passwordEncoder.encode(dto.getPassword()));
+        String token = UUID.randomUUID().toString();
+        account.setVerificationToken(token);
+
         accountService.saveAccount(account);
 
         try {
-            emailService.sendVerificationEmail(account.getEmail(), "dev-token-123");
+            emailService.sendVerificationEmail(account.getEmail(), token);
         } catch (Exception e) {
             System.out.println("Mail failed but user saved: " + e.getMessage());
         }
@@ -68,5 +74,20 @@ public class AuthController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
+    }
+
+    @GetMapping("/verify")
+    public String verifyAccount(@RequestParam("token") String token) {
+        Optional<Account> accountOpt = accountService.findByVerificationToken(token);
+
+        if (accountOpt.isPresent()) {
+            Account account = accountOpt.get();
+            account.setVerified(true);
+            account.setVerificationToken(null);
+            accountService.saveAccount(account);
+            return "redirect:/login?verified=true";
+        }
+
+        return "redirect:/login?error=invalid-token";
     }
 }

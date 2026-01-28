@@ -21,8 +21,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/signup", "/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll() // Added H2 here
+                        .requestMatchers("/", "/login", "/signup", "/verify", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(login -> login
@@ -31,8 +31,6 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll())
-
-                // 4. H2 Console Specifics
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
 

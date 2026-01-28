@@ -41,4 +41,8 @@ public class AccountService {
     public void deleteAccount(Long id) {
         accountRepository.deleteById(id);
     }
+
+    public Optional<Account> findByVerificationToken(String token) {
+        return accountRepository.findByVerificationToken(token);
+    }
 }
