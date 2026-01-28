@@ -8,13 +8,16 @@
     <div class="page-container">
         <div th:replace="~{fragments :: auth-header}"></div>
 
-        <form th:action="@{/signup}" th:object="${accountRequest}" method="post">
-            <input type="text" th:field="*{name}" class="large-input mb-20" placeholder="Name" required>
+        <form id="signupForm" th:action="@{/signup}" th:object="${accountRequest}" method="post">
+            <input type="text" th:field="*{name}" class="large-input mb-20" placeholder="Full Name" required>
             <input type="email" th:field="*{email}" class="large-input mb-20" placeholder="Email" required>
+            <input type="password" id="password" th:field="*{password}" class="large-input mb-20" placeholder="Password" required>
+            <input type="password" id="confirmPassword" class="large-input mb-20" placeholder="Confirm Password" required>
             <button type="submit" class="btn btn-primary btn-big">Sign Up</button>
         </form>
 
         <a th:href="@{/login}" class="btn btn-secondary btn-big push-bottom">Already Have an Account?</a>
     </div>
+    <script th:src="@{/js/signup.js}"></script>
 </body>
 </html>
