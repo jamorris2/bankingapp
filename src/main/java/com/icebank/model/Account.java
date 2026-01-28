@@ -25,4 +25,5 @@ public class Account {
     private boolean verified = false;
     private String name;
     private double balance;
+    private String verificationToken;
 }

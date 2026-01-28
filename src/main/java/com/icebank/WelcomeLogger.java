@@ -13,6 +13,7 @@ public class WelcomeLogger implements CommandLineRunner {
         System.out.println("  DASHBOARD: http://localhost:8082/dashboard/1");
         System.out.println("  TRANSFER: http://localhost:8082/transfer");
         System.out.println("\n\n  Swagger: http://localhost:8082/swagger-ui/index.html");
+        System.out.println("  H2 Console: http://localhost:8082/h2-console  \n  SELECT * FROM ACCOUNT;\n  DELETE FROM ACCOUNT;");
         System.out.println("----------------------------------------------------------\n");
     }
 }
