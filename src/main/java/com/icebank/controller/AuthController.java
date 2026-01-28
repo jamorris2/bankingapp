@@ -18,6 +18,9 @@ public class AuthController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
     @GetMapping("/")
     public String index() {
         return "redirect:/login";
@@ -40,8 +43,10 @@ public class AuthController {
         account.setName(dto.getName());
         account.setEmail(dto.getEmail());
 
-        accountService.saveAccount(account);
+        String encodedPassword = passwordEncoder.encode(dto.getPassword());
+        account.setPassword(encodedPassword);
 
+        accountService.saveAccount(account);
         return "redirect:/login?success";
     }
 
