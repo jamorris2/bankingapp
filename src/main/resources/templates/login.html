@@ -10,14 +10,8 @@
             <div th:replace="~{fragments :: auth-header}"></div>
 
             <form th:action="@{/processLogin}" method="post">
-                <input type="text"
-                       name="userID"
-                       class="large-input mb-20"
-                       placeholder="User ID"
-                       pattern="[0-9]*"
-                       inputmode="numeric"
-                       required>
-
+                <input type="email" name="emailAddress" class="large-input mb-20" placeholder="Email Address" required>
+                <input type="password" name="password" class="large-input mb-20" placeholder="Password" required>
                 <button type="submit" class="btn btn-primary btn-big">Log In</button>
             </form>
 
