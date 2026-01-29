@@ -27,6 +27,9 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login
                         .loginPage("/login")
+                        .loginProcessingUrl("/processLogin")
+                        .usernameParameter("emailAddress")
+                        .passwordParameter("password")
                         .defaultSuccessUrl("/dashboard", true)
                         .permitAll()
                 )

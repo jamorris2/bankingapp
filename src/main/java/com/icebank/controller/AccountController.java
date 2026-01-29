@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
 @Controller
 public class AccountController {
 
@@ -17,12 +19,12 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping("/dashboard")
-    public String showDashboard(HttpSession session, Model model) {
-        Long id = (Long) session.getAttribute("currentUserId");
-        if (id == null) return "redirect:/login";
+    public String showDashboard(Principal principal, Model model) {
+        if (principal == null) return "redirect:/login";
 
-        Account account = accountService.getAccountById(id)
-                .orElseThrow(() -> new RuntimeException("Account not found with ID: " + id));
+        String email = principal.getName();
+        Account account = accountService.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Logged in user not found in database"));
 
         model.addAttribute("userAccount", account);
         return "dashboard";
