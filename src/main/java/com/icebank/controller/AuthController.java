@@ -64,12 +64,6 @@ public class AuthController {
         return "redirect:/login?success";
     }
 
-    @PostMapping("/processLogin")
-    public String handleLogin(@RequestParam("userID") Long userID, HttpSession session) {
-        session.setAttribute("currentUserId", userID);
-        return "redirect:/dashboard";
-    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
