@@ -26,5 +26,31 @@
         </div>
     </header>
 
+    <div th:fragment="alerts" class="alert-wrapper">
+        <div th:if="${param.success}" class="custom-alert alert-success">
+            <div class="alert-content">
+                <span class="alert-title">Success!</span>
+                <span class="alert-message">Check your email to verify your account.</span>
+            </div>
+            <button type="button" class="close-alert" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+
+        <div th:if="${param.verified}" class="custom-alert alert-info">
+            <div class="alert-content">
+                <span class="alert-title">Verified!</span>
+                <span class="alert-message">Your account is active. You can now log in.</span>
+            </div>
+            <button type="button" class="close-alert" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+
+        <div th:if="${param.error}" class="custom-alert alert-danger">
+            <div class="alert-content">
+                <span class="alert-title" th:text="${param.error[0] == 'invalid-token' ? 'Invalid Link' : 'Login Failed'}">Error</span>
+                <span class="alert-message">Please check your details and try again.</span>
+            </div>
+            <button type="button" class="close-alert" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+    </div>
+
 </body>
 </html>
