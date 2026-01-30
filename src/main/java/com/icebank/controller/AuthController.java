@@ -53,15 +53,13 @@ public class AuthController {
         String token = UUID.randomUUID().toString();
         account.setVerificationToken(token);
 
-        accountService.saveAccount(account);
-
         try {
             emailService.sendVerificationEmail(account.getEmail(), token);
+            accountService.saveAccount(account);
+            return "redirect:/login?success";
         } catch (Exception e) {
-            System.out.println("Mail failed but user saved: " + e.getMessage());
+            return "redirect:/signup?error=email-service-down";
         }
-
-        return "redirect:/login?success";
     }
 
     @GetMapping("/logout")

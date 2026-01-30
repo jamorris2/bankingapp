@@ -26,5 +26,34 @@
         </div>
     </header>
 
+
+    <div th:fragment="alerts">
+        <div th:if="${param.success}">
+            <div th:replace="~{fragments :: customAlert('success', 'Success!', 'Check your email to verify your account.')}"></div>
+        </div>
+
+<!--        <div th:if="${param.verified}">-->
+<!--            <div th:replace="~{fragments :: customAlert('info', 'Verified!', 'Your account is active. You can now log in.')}"></div>-->
+<!--        </div>-->
+
+<!--        <div th:if="${param.error != null and param.unverified}">-->
+<!--            <div th:replace="~{fragments :: customAlert('info', 'Account Pending', 'Please verify your email before logging in.')}"></div>-->
+<!--        </div>-->
+
+<!--        <div th:if="${param.error != null and !param.unverified}">-->
+<!--            <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Invalid email or password.')}"></div>-->
+<!--        </div>-->
+    </div>
+
+    <div th:fragment="customAlert(alertType, title, message)" class="alert-wrapper">
+        <div th:class="'custom-alert alert-' + ${alertType}">
+            <div class="alert-content">
+                <span class="alert-title" th:text="${title}">Title</span>
+                <span class="alert-message" th:text="${message}">Message</span>
+            </div>
+            <button type="button" class="close-alert" onclick="this.parentElement.parentElement.style.display='none';">&times;</button>
+        </div>
+    </div>
+
 </body>
 </html>
