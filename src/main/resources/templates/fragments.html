@@ -32,9 +32,9 @@
             <div th:replace="~{fragments :: customAlert('success', 'Success!', 'Check your email to verify your account.')}"></div>
         </div>
 
-<!--        <div th:if="${param.verified}">-->
-<!--            <div th:replace="~{fragments :: customAlert('info', 'Verified!', 'Your account is active. You can now log in.')}"></div>-->
-<!--        </div>-->
+        <div th:if="${param.verified}">
+            <div th:replace="~{fragments :: customAlert('info', 'Verified!', 'Your account is active. You can now log in.')}"></div>
+        </div>
 
 <!--        <div th:if="${param.error != null and param.unverified}">-->
 <!--            <div th:replace="~{fragments :: customAlert('info', 'Account Pending', 'Please verify your email before logging in.')}"></div>-->
