@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -31,6 +32,7 @@ public class SecurityConfig {
                         .usernameParameter("emailAddress")
                         .passwordParameter("password")
                         .defaultSuccessUrl("/dashboard", true)
+                        .failureHandler(customAuthenticationFailureHandler())
                         .permitAll()
                 )
                 .logout(logout -> logout.permitAll())
@@ -38,5 +40,18 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"));
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return (request, response, exception) -> {
+            String errorMessage = "error";
+
+            if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
+                errorMessage = "account-unverified";
+            }
+
+            response.sendRedirect("/login?status=" + errorMessage);
+        };
     }
 }

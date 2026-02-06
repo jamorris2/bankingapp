@@ -35,6 +35,10 @@
         <th:block th:if="${param.status[0] == 'account-verified'}">
             <div th:replace="~{fragments :: customAlert('success', 'Verified!', 'Your account is active. You can now log in.')}"></div>
         </th:block>
+
+        <th:block th:if="${param.status[0] == 'account-unverified'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Verification Required', 'Please check your email to verify your account before logging in.')}"></div>
+        </th:block>
     </div>
 
     <div th:fragment="customAlert(alertType, title, message)" class="alert-wrapper">
