@@ -56,7 +56,7 @@ public class AuthController {
         try {
             emailService.sendVerificationEmail(account.getEmail(), token);
             accountService.saveAccount(account);
-            return "redirect:/login?success";
+            return "redirect:/login?status=account-created";
         } catch (Exception e) {
             return "redirect:/signup?error=email-service-down";
         }
@@ -77,7 +77,7 @@ public class AuthController {
             account.setVerified(true);
             account.setVerificationToken(null);
             accountService.saveAccount(account);
-            return "redirect:/login?verified=true";
+            return "redirect:/login?status=account-verified";
         }
 
         return "redirect:/login?error=invalid-token";

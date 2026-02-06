@@ -27,22 +27,14 @@
     </header>
 
 
-    <div th:fragment="alerts">
-        <div th:if="${param.success}">
+    <div th:fragment="alerts" th:if="${param.status != null}">
+        <th:block th:if="${param.status[0] == 'account-created'}">
             <div th:replace="~{fragments :: customAlert('success', 'Success!', 'Check your email to verify your account.')}"></div>
-        </div>
+        </th:block>
 
-        <div th:if="${param.verified}">
-            <div th:replace="~{fragments :: customAlert('info', 'Verified!', 'Your account is active. You can now log in.')}"></div>
-        </div>
-
-<!--        <div th:if="${param.error != null and param.unverified}">-->
-<!--            <div th:replace="~{fragments :: customAlert('info', 'Account Pending', 'Please verify your email before logging in.')}"></div>-->
-<!--        </div>-->
-
-<!--        <div th:if="${param.error != null and !param.unverified}">-->
-<!--            <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Invalid email or password.')}"></div>-->
-<!--        </div>-->
+        <th:block th:if="${param.status[0] == 'account-verified'}">
+            <div th:replace="~{fragments :: customAlert('success', 'Verified!', 'Your account is active. You can now log in.')}"></div>
+        </th:block>
     </div>
 
     <div th:fragment="customAlert(alertType, title, message)" class="alert-wrapper">
