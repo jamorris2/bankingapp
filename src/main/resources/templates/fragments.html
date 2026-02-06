@@ -39,6 +39,10 @@
         <th:block th:if="${param.status[0] == 'account-unverified'}">
             <div th:replace="~{fragments :: customAlert('danger', 'Verification Required', 'Please check your email to verify your account before logging in.')}"></div>
         </th:block>
+
+        <th:block th:if="${param.status[0] == 'bad-credentials'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Incorrect username or password')}"></div>
+        </th:block>
     </div>
 
     <div th:fragment="customAlert(alertType, title, message)" class="alert-wrapper">

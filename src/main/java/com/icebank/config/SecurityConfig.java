@@ -2,6 +2,8 @@ package com.icebank.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,13 +47,15 @@ public class SecurityConfig {
     @Bean
     public AuthenticationFailureHandler customAuthenticationFailureHandler() {
         return (request, response, exception) -> {
-            String errorMessage = "error";
+            String status = "error";
 
-            if (exception.getMessage().equalsIgnoreCase("User is disabled")) {
-                errorMessage = "account-unverified";
+            if (exception instanceof DisabledException) {
+                status = "account-unverified";
+            } else if (exception instanceof BadCredentialsException) {
+                status = "bad-credentials";
             }
 
-            response.sendRedirect("/login?status=" + errorMessage);
+            response.sendRedirect("/login?status=" + status);
         };
     }
 }
