@@ -46,6 +46,11 @@ public class AuthController {
 
     @PostMapping("/signup")
     public String registerAccount(@ModelAttribute("accountRequest") AccountRequestDTO dto) {
+
+        if (accountService.findByEmail(dto.getEmail()).isPresent()) {
+            return "redirect:/signup?status=email-exists";
+        }
+
         Account account = new Account();
         account.setName(dto.getName());
         account.setEmail(dto.getEmail());
