@@ -46,6 +46,11 @@ public class AuthController {
 
     @PostMapping("/signup")
     public String registerAccount(@ModelAttribute("accountRequest") AccountRequestDTO dto) {
+
+        if (accountService.findByEmail(dto.getEmail()).isPresent()) {
+            return "redirect:/signup?status=email-exists";
+        }
+
         Account account = new Account();
         account.setName(dto.getName());
         account.setEmail(dto.getEmail());
@@ -53,15 +58,13 @@ public class AuthController {
         String token = UUID.randomUUID().toString();
         account.setVerificationToken(token);
 
-        accountService.saveAccount(account);
-
         try {
             emailService.sendVerificationEmail(account.getEmail(), token);
+            accountService.saveAccount(account);
+            return "redirect:/login?status=account-created";
         } catch (Exception e) {
-            System.out.println("Mail failed but user saved: " + e.getMessage());
+            return "redirect:/signup?status=signup-failed";
         }
-
-        return "redirect:/login?success";
     }
 
     @GetMapping("/logout")
@@ -79,7 +82,7 @@ public class AuthController {
             account.setVerified(true);
             account.setVerificationToken(null);
             accountService.saveAccount(account);
-            return "redirect:/login?verified=true";
+            return "redirect:/login?status=account-verified";
         }
 
         return "redirect:/login?error=invalid-token";

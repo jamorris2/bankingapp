@@ -26,5 +26,48 @@
         </div>
     </header>
 
+
+    <div th:fragment="loginAlerts" th:if="${param.status != null}">
+        <th:block th:if="${param.status[0] == 'account-created'}">
+            <div th:replace="~{fragments :: customAlert('success', 'Success!', 'Check your email to verify your account.')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'account-verified'}">
+            <div th:replace="~{fragments :: customAlert('success', 'Verified!', 'Your account is active. You can now log in.')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'account-unverified'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Verification Required', 'Please check your email to verify your account before logging in.')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'bad-credentials'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Incorrect username or password')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'error'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'An unexpected error occurred. Could not login to account.')}"></div>
+        </th:block>
+    </div>
+
+    <div th:fragment="signupAlerts" th:if="${param.status != null}">
+        <th:block th:if="${param.status[0] == 'email-exists'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'SignUp Failed', 'That email is already registered. Please log in.')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'signup-failed'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'SignUp Error', 'Something went wrong. Please try again.')}"></div>
+        </th:block>
+    </div>
+
+    <div th:fragment="customAlert(alertType, title, message)" class="alert-wrapper">
+        <div th:class="'custom-alert alert-' + ${alertType}">
+            <div class="alert-content">
+                <span class="alert-title" th:text="${title}">Title</span>
+                <span class="alert-message" th:text="${message}">Message</span>
+            </div>
+            <button type="button" class="close-alert" onclick="this.parentElement.parentElement.style.display='none';">&times;</button>
+        </div>
+    </div>
+
 </body>
 </html>

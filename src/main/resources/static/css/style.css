@@ -31,7 +31,7 @@ form {
 
 /* --- Elements --- */
 .logo {
-    max-width: 120px;
+    max-width: 80px;
     height: auto;
     margin-bottom: 20px;
 
@@ -296,3 +296,64 @@ form {
     margin-top: auto;
     margin-bottom: 20px;
 }
+
+/* --- ALERTS ---
+   ALERT STYLING
+*/
+..alert-wrapper {
+     width: 100%;
+     max-width: 400px;
+     margin: 0 auto 20px auto;
+     padding: 0 20px;
+     box-sizing: border-box;
+ }
+
+ .custom-alert {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 14px 18px;
+     border-radius: 16px; /* High-end rounded look */
+     border: 1px solid;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+     animation: slideDown 0.4s ease-out;
+ }
+
+ .alert-content {
+     display: flex;
+     flex-direction: column;
+     gap: 2px;
+ }
+
+ .alert-title {
+     font-size: 15px;
+     font-weight: 800;
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+ }
+
+ .alert-message {
+     font-size: 14px;
+     opacity: 0.9;
+     line-height: 1.3;
+ }
+
+ /* Color Themes */
+ .alert-success { background: #ecfdf5; border-color: #10b981; color: #064e3b; }
+ .alert-info { background: #eff6ff; border-color: #3b82f6; color: #1e3a8a; }
+ .alert-danger { background: #fef2f2; border-color: #ef4444; color: #7f1d1d; }
+
+ .close-alert {
+     background: none;
+     border: none;
+     font-size: 24px;
+     cursor: pointer;
+     color: inherit;
+     padding: 0 0 0 12px;
+     line-height: 1;
+ }
+
+ @keyframes slideDown {
+     from { transform: translateY(-10px); opacity: 0; }
+     to { transform: translateY(0); opacity: 1; }
+ }
