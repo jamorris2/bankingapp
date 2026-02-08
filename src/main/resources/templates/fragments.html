@@ -43,6 +43,10 @@
         <th:block th:if="${param.status[0] == 'bad-credentials'}">
             <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Incorrect username or password')}"></div>
         </th:block>
+
+        <th:block th:if="${param.status[0] == 'error'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'An unexpected error occurred. Could not login to account.')}"></div>
+        </th:block>
     </div>
 
     <div th:fragment="signupAlerts" th:if="${param.status != null}">
