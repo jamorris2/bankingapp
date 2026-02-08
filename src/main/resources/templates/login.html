@@ -7,7 +7,7 @@
 
     <body>
         <div class="page-container">
-            <div th:replace="~{fragments :: alerts}"></div>
+            <div th:replace="~{fragments :: loginAlerts}"></div>
             <div th:replace="~{fragments :: auth-header}"></div>
 
             <form th:action="@{/processLogin}" method="post">

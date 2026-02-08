@@ -27,7 +27,7 @@
     </header>
 
 
-    <div th:fragment="alerts" th:if="${param.status != null}">
+    <div th:fragment="loginAlerts" th:if="${param.status != null}">
         <th:block th:if="${param.status[0] == 'account-created'}">
             <div th:replace="~{fragments :: customAlert('success', 'Success!', 'Check your email to verify your account.')}"></div>
         </th:block>
@@ -42,6 +42,12 @@
 
         <th:block th:if="${param.status[0] == 'bad-credentials'}">
             <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Incorrect username or password')}"></div>
+        </th:block>
+    </div>
+
+    <div th:fragment="signupAlerts" th:if="${param.status != null}">
+        <th:block th:if="${param.status[0] == 'signup-failed'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'SignUp Failed', 'An unexpected error occurred. Account could not be created.')}"></div>
         </th:block>
     </div>
 

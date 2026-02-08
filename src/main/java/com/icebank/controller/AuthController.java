@@ -58,7 +58,7 @@ public class AuthController {
             accountService.saveAccount(account);
             return "redirect:/login?status=account-created";
         } catch (Exception e) {
-            return "redirect:/signup?error=email-service-down";
+            return "redirect:/signup?status=signup-failed";
         }
     }
 
