@@ -85,6 +85,6 @@ public class AuthController {
             return "redirect:/login?status=account-verified";
         }
 
-        return "redirect:/login?error=invalid-token";
+        return "redirect:/login?status=verification-error";
     }
 }

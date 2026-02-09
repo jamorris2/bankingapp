@@ -44,6 +44,10 @@
             <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Incorrect username or password')}"></div>
         </th:block>
 
+        <th:block th:if="${param.status[0] == 'verification-error'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Verification Failed', 'Account could not be verified. Please try again later.')}"></div>
+        </th:block>
+
         <th:block th:if="${param.status[0] == 'error'}">
             <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'An unexpected error occurred. Could not login to account.')}"></div>
         </th:block>
