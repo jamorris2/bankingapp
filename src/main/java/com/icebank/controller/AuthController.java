@@ -87,4 +87,9 @@ public class AuthController {
 
         return "redirect:/login?status=verification-error";
     }
+
+    @GetMapping("/forgot-password")
+    public String showForgotPassword() {
+        return "forgot-password";
+    }
 }

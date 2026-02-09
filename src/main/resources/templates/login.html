@@ -10,11 +10,12 @@
             <div th:replace="~{fragments :: loginAlerts}"></div>
             <div th:replace="~{fragments :: auth-header}"></div>
 
-            <form th:action="@{/processLogin}" method="post">
+            <form th:action="@{/processLogin}" method="post" class="mb-20">
                 <input type="email" name="emailAddress" class="large-input mb-20" placeholder="Email Address" required>
                 <input type="password" name="password" class="large-input mb-20" placeholder="Password" required>
                 <button type="submit" class="btn btn-primary btn-big">Log In</button>
             </form>
+            <a th:href="@{/forgot-password}" class="push-left color-light">Forgot password?</a>
 
             <a th:href="@{/signup}" class="btn btn-secondary btn-big push-bottom">Create New Account</a>
         </div>
