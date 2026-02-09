@@ -16,7 +16,7 @@
 
     <header th:fragment="toolbar-header" class="toolbar">
         <div class="toolbar-content">
-            <a th:if="${showBack}" th:href="@{/dashboard}" class="back-btn">&#10094;</a>
+            <a th:if="${showBack}" th:href="@{/dashboard}" class="back-btn back-btn-toolbar">&#10094;</a>
 
             <h1 class="m-0">IceBank</h1>
 
@@ -60,6 +60,12 @@
 
         <th:block th:if="${param.status[0] == 'signup-failed'}">
             <div th:replace="~{fragments :: customAlert('danger', 'SignUp Error', 'Something went wrong. Please try again.')}"></div>
+        </th:block>
+    </div>
+
+    <div th:fragment="forgotPasswordAlerts" th:if="${param.status != null}">
+        <th:block th:if="${param.status[0] == 'not-found'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Password Reset Failed', 'An account with that email could not be found')}"></div>
         </th:block>
     </div>
 
