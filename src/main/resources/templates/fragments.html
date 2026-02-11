@@ -48,6 +48,10 @@
             <div th:replace="~{fragments :: customAlert('danger', 'Verification Failed', 'Account could not be verified. Please try again later.')}"></div>
         </th:block>
 
+        <th:block th:if="${param.status[0] == 'reset-password-success'}">
+            <div th:replace="~{fragments :: customAlert('success', 'Password Reset', 'If an account is associated with that email, you will receive a link to reset your password')}"></div>
+        </th:block>
+
         <th:block th:if="${param.status[0] == 'error'}">
             <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'An unexpected error occurred. Could not login to account.')}"></div>
         </th:block>
@@ -64,8 +68,8 @@
     </div>
 
     <div th:fragment="forgotPasswordAlerts" th:if="${param.status != null}">
-        <th:block th:if="${param.status[0] == 'not-found'}">
-            <div th:replace="~{fragments :: customAlert('danger', 'Password Reset Failed', 'An account with that email could not be found')}"></div>
+        <th:block th:if="${param.status[0] == 'error'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Password Reset Failed', 'An unexpected error occurred. Could not reset password.')}"></div>
         </th:block>
     </div>
 

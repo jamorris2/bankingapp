@@ -4,6 +4,7 @@ import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
 import com.icebank.service.EmailService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.security.auth.login.AccountNotFoundException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -91,5 +93,23 @@ public class AuthController {
     @GetMapping("/forgot-password")
     public String showForgotPassword() {
         return "forgot-password";
+    }
+
+    @PostMapping("/forgot-password")
+    public String resetPassword(@RequestParam("emailAddress") String userEmail) {
+        Optional<Account> accountOpt = accountService.findByEmail(userEmail);
+        if (!accountOpt.isPresent()) return "redirect:/login?status=reset-password-success";
+
+        Account account = accountOpt.get();
+        String token = UUID.randomUUID().toString();
+        account.setResetPasswordToken(token);
+
+        try {
+            emailService.sendResetPasswordEmail(account.getEmail(), token);
+            accountService.saveAccount(account);
+            return "redirect:/login?status=reset-password-success";
+        } catch (Exception e) {
+            return "redirect:/forgot-password?status=error";
+        }
     }
 }
