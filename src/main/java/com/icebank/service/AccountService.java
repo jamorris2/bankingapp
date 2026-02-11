@@ -66,4 +66,8 @@ public class AccountService implements UserDetailsService {
     public Optional<Account> findByEmail(String email) {
         return accountRepository.findByEmail(email);
     }
+
+    public Optional<Account> findByResetPasswordToken(String token) {
+        return accountRepository.findByResetPasswordToken(token);
+    }
 }

@@ -112,4 +112,27 @@ public class AuthController {
             return "redirect:/forgot-password?status=error";
         }
     }
+
+    @GetMapping("/changePassword")
+    public String showChangePassword(@RequestParam("token") String token, Model model) {
+        model.addAttribute("token", token);
+        return "changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    public String handlePasswordReset(@RequestParam("token") String token,
+                                      @RequestParam("password") String newPassword) {
+        Optional<Account> accountOpt = accountService.findByResetPasswordToken(token);
+        if (!accountOpt.isPresent()) return "redirect:/login?status=reset-password-error";
+
+        Account account = accountOpt.get();
+        try {
+            account.setPassword(passwordEncoder.encode(newPassword));
+            account.setResetPasswordToken(null);
+            accountService.saveAccount(account);
+            return "redirect:/login?status=password-reset-success";
+        } catch (Exception e) {
+            return "redirect:/login?status=reset-password-error";
+        }
+    }
 }
