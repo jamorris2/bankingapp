@@ -48,12 +48,16 @@
             <div th:replace="~{fragments :: customAlert('danger', 'Verification Failed', 'Account could not be verified. Please try again later.')}"></div>
         </th:block>
 
-        <th:block th:if="${param.status[0] == 'reset-password-success'}">
+        <th:block th:if="${param.status[0] == 'reset-password-sent'}">
             <div th:replace="~{fragments :: customAlert('success', 'Password Reset', 'If an account is associated with that email, you will receive a link to reset your password')}"></div>
         </th:block>
 
         <th:block th:if="${param.status[0] == 'reset-password-error'}">
             <div th:replace="~{fragments :: customAlert('danger', 'Password Reset Failed', 'An unexpected error occurred. Could not reset password.')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'password-change-success'}">
+            <div th:replace="~{fragments :: customAlert('success', 'Password Changed', 'Your password has been successfully changed. Login to continue.')}"></div>
         </th:block>
 
         <th:block th:if="${param.status[0] == 'error'}">

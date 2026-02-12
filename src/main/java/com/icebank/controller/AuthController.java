@@ -98,7 +98,7 @@ public class AuthController {
     @PostMapping("/forgot-password")
     public String resetPassword(@RequestParam("emailAddress") String userEmail) {
         Optional<Account> accountOpt = accountService.findByEmail(userEmail);
-        if (!accountOpt.isPresent()) return "redirect:/login?status=reset-password-success";
+        if (!accountOpt.isPresent()) return "redirect:/login?status=reset-password-sent";
 
         Account account = accountOpt.get();
         String token = UUID.randomUUID().toString();
@@ -107,7 +107,7 @@ public class AuthController {
         try {
             emailService.sendResetPasswordEmail(account.getEmail(), token);
             accountService.saveAccount(account);
-            return "redirect:/login?status=reset-password-success";
+            return "redirect:/login?status=reset-password-sent";
         } catch (Exception e) {
             return "redirect:/forgot-password?status=error";
         }
@@ -130,7 +130,7 @@ public class AuthController {
             account.setPassword(passwordEncoder.encode(newPassword));
             account.setResetPasswordToken(null);
             accountService.saveAccount(account);
-            return "redirect:/login?status=password-reset-success";
+            return "redirect:/login?status=password-change-success";
         } catch (Exception e) {
             return "redirect:/login?status=reset-password-error";
         }
