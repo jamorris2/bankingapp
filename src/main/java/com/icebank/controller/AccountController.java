@@ -32,27 +32,25 @@ public class AccountController {
 
 
     @GetMapping("/transfer")
-    public String showTransferPage(HttpSession session, Model model) {
-        Long id = (Long) session.getAttribute("currentUserId");
-        if (id == null) return "redirect:/login";
+    public String showTransferPage(Principal principal, Model model) {
+        if (principal == null) return "redirect:/login";
 
-        Account account = accountService.getAccountById(id)
+        String email = principal.getName();
+        Account account = accountService.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
         model.addAttribute("userAccount", account);
-
         return "transfer";
     }
 
     @PostMapping("/processTransfer")
     public String processTransfer(@RequestParam("amount") double amount,
                                   @RequestParam("type") String type,
-                                  HttpSession session) {
+                                  Principal principal) {
 
-        Long id = (Long) session.getAttribute("currentUserId");
-        if (id == null) return "redirect:/login";
+        if (principal == null) return "redirect:/login";
 
-        Account account = accountService.getAccountById(id)
+        Account account = accountService.findByEmail(principal.getName())
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
         if ("IN".equals(type)) {

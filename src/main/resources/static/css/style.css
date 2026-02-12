@@ -174,15 +174,18 @@ form {
 }
 
 .back-btn {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
     font-weight: bold;
     line-height: 1;
+}
+
+.back-btn-toolbar {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .back-btn:hover {
@@ -356,4 +359,8 @@ form {
  @keyframes slideDown {
      from { transform: translateY(-10px); opacity: 0; }
      to { transform: translateY(0); opacity: 1; }
+ }
+
+ .color-light {
+    color: #FFFFFF;
  }

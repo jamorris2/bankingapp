@@ -16,7 +16,7 @@
 
     <header th:fragment="toolbar-header" class="toolbar">
         <div class="toolbar-content">
-            <a th:if="${showBack}" th:href="@{/dashboard}" class="back-btn">&#10094;</a>
+            <a th:if="${showBack}" th:href="@{/dashboard}" class="back-btn back-btn-toolbar">&#10094;</a>
 
             <h1 class="m-0">IceBank</h1>
 
@@ -44,6 +44,22 @@
             <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'Incorrect username or password')}"></div>
         </th:block>
 
+        <th:block th:if="${param.status[0] == 'verification-error'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Verification Failed', 'Account could not be verified. Please try again later.')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'reset-password-sent'}">
+            <div th:replace="~{fragments :: customAlert('success', 'Password Reset', 'If an account is associated with that email, you will receive a link to reset your password')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'reset-password-error'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Password Reset Failed', 'An unexpected error occurred. Could not reset password.')}"></div>
+        </th:block>
+
+        <th:block th:if="${param.status[0] == 'password-change-success'}">
+            <div th:replace="~{fragments :: customAlert('success', 'Password Changed', 'Your password has been successfully changed. Login to continue.')}"></div>
+        </th:block>
+
         <th:block th:if="${param.status[0] == 'error'}">
             <div th:replace="~{fragments :: customAlert('danger', 'Login Failed', 'An unexpected error occurred. Could not login to account.')}"></div>
         </th:block>
@@ -56,6 +72,12 @@
 
         <th:block th:if="${param.status[0] == 'signup-failed'}">
             <div th:replace="~{fragments :: customAlert('danger', 'SignUp Error', 'Something went wrong. Please try again.')}"></div>
+        </th:block>
+    </div>
+
+    <div th:fragment="forgotPasswordAlerts" th:if="${param.status != null}">
+        <th:block th:if="${param.status[0] == 'error'}">
+            <div th:replace="~{fragments :: customAlert('danger', 'Password Reset Failed', 'An unexpected error occurred. Could not reset password.')}"></div>
         </th:block>
     </div>
 
