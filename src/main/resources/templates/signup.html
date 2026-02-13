@@ -10,9 +10,9 @@
         <div th:replace="~{fragments :: auth-header}"></div>
 
         <form id="signupForm" th:action="@{/signup}" th:object="${accountRequest}" method="post">
-            <input type="text" th:field="*{name}" class="large-input mb-20" placeholder="Full Name" required>
-            <input type="email" th:field="*{email}" class="large-input mb-20" placeholder="Email" required>
-            <input type="password" id="password" th:field="*{password}" class="large-input mb-20" placeholder="Password" required>
+            <input type="text" minLength="1" maxLength="50" th:field="*{name}" class="large-input mb-20" placeholder="Full Name" required>
+            <input type="email" maxLength="50" th:field="*{email}" class="large-input mb-20" placeholder="Email" required>
+            <input type="password" minLength="6" maxLength="20" id="password" th:field="*{password}" class="large-input mb-20" placeholder="Password" required>
             <input type="password" id="confirmPassword" class="large-input mb-20" placeholder="Confirm Password" required>
             <button type="submit" class="btn btn-primary btn-big">Sign Up</button>
         </form>
