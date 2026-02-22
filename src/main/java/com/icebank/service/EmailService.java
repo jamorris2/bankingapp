@@ -1,43 +1,61 @@
 package com.icebank.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Value("${mailtrap.api.token}")
+    private String apiToken;
 
-    @Autowired
-    private Environment env;
+    @Value("${app.base.url}")
+    private String baseUrl;
+
+    @Value("${support.email}")
+    private String fromEmail;
+
+    private final RestTemplate restTemplate = new RestTemplate();
+
+    private static final String MAILTRAP_URL =
+            "https://send.api.mailtrap.io/api/send";
 
     public void sendVerificationEmail(String to, String token) {
-        String baseUrl = env.getProperty("app.base.url");
-        String verificationUrl = baseUrl + "/verify?token=" + token;
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject("Verify your IceBank Account");
-        message.setText("Click the link to verify your account: " + verificationUrl);
-        message.setFrom(env.getProperty("support.email"));
-
-        mailSender.send(message);
+        String link = baseUrl + "/verify?token=" + token;
+        sendEmail(to, "Verify your IceBank Account",
+                "Click the link to verify your account: " + link);
     }
 
     public void sendResetPasswordEmail(String to, String token) {
-        String baseUrl = env.getProperty("app.base.url");
-        String resetPasswordUrl = baseUrl + "/changePassword?token=" + token;
+        String link = baseUrl + "/changePassword?token=" + token;
+        sendEmail(to, "Reset your IceBank password",
+                "Click the link to reset your password: " + link);
+    }
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject("Reset Password");
-        message.setText("Click the link to reset your password: " + resetPasswordUrl);
-        message.setFrom(env.getProperty("support.email"));
+    private void sendEmail(String to, String subject, String text) {
 
-        mailSender.send(message);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiToken);
+
+        String body = """
+        {
+          "from": { "email": "%s" },
+          "to": [{ "email": "%s" }],
+          "subject": "%s",
+          "text": "%s"
+        }
+        """.formatted(fromEmail, to, subject, text);
+
+        HttpEntity<String> request = new HttpEntity<>(body, headers);
+
+        restTemplate.exchange(
+                MAILTRAP_URL,
+                HttpMethod.POST,
+                request,
+                String.class
+        );
     }
 }
