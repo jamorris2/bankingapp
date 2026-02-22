@@ -4,8 +4,8 @@ import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
 import com.icebank.service.EmailService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.Optional;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthController {
 
     @Autowired
@@ -63,8 +63,10 @@ public class AuthController {
         try {
             emailService.sendVerificationEmail(account.getEmail(), token);
             accountService.saveAccount(account);
+            log.info("User successfully registered: {}", account.getEmail());
             return "redirect:/login?status=account-created";
         } catch (Exception e) {
+            log.error("Registration FAILED for email: {}. Reason: {}", account.getEmail(), e.getMessage(), e);
             return "redirect:/signup?status=signup-failed";
         }
     }
