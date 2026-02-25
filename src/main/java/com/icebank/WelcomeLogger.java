@@ -5,15 +5,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class WelcomeLogger implements CommandLineRunner {
+
+    // ToDo: Clean this up!!!
     @Override
     public void run(String... args) {
         System.out.println("\n----------------------------------------------------------");
         System.out.println("  BANKING APP IS LIVE!");
-        System.out.println("  URL: http://localhost:8082");
-        System.out.println("  DASHBOARD: http://localhost:8082/dashboard/1");
-        System.out.println("  TRANSFER: http://localhost:8082/transfer");
-        System.out.println("\n\n  Swagger: http://localhost:8082/swagger-ui/index.html");
-        System.out.println("  H2 Console: http://localhost:8082/h2-console  \n  SELECT * FROM ACCOUNT;\n  DELETE FROM ACCOUNT;");
+        String port = System.getenv("PORT");
+        System.out.println(" URL: http://localhost:" + (port != null ? port : "8082"));
+//        System.out.println("  DASHBOARD: http://localhost:8082/dashboard/1");
+//        System.out.println("  TRANSFER: http://localhost:8082/transfer");
+//        System.out.println("\n\n  Swagger: http://localhost:8082/swagger-ui/index.html");
+//        System.out.println("  H2 Console: http://localhost:8082/h2-console  \n  SELECT * FROM ACCOUNT;\n  DELETE FROM ACCOUNT;");
         System.out.println("----------------------------------------------------------\n");
     }
 }
