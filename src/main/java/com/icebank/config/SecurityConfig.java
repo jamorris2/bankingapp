@@ -55,7 +55,8 @@ public class SecurityConfig {
                 status = "bad-credentials";
             }
 
-            response.sendRedirect("/login?status=" + status);
+            String email = request.getParameter("emailAddress");
+            response.sendRedirect("/login?status=" + status + "&email=" + email);
         };
     }
 }

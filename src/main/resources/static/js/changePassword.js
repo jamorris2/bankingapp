@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (errorMessage !== "") {
-            event.preventDefault(); // Stop form submission
+            event.preventDefault();
             alert(errorMessage);
             confirmPassword.value = "";
             password.focus();

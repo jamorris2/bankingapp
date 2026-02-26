@@ -66,12 +66,12 @@
         </th:block>
     </div>
 
-    <div th:fragment="signupAlerts" th:if="${param.status != null}">
-        <th:block th:if="${param.status[0] == 'email-exists'}">
+    <div th:fragment="signupAlerts" th:if="${status != null}">
+        <th:block th:if="${status == 'email-exists'}">
             <div th:replace="~{fragments :: customAlert('danger', 'SignUp Failed', 'That email is already registered. Please log in.')}"></div>
         </th:block>
 
-        <th:block th:if="${param.status[0] == 'signup-failed'}">
+        <th:block th:if="${status == 'signup-failed'}">
             <div th:replace="~{fragments :: customAlert('danger', 'SignUp Error', 'Something went wrong. Please try again.')}"></div>
         </th:block>
     </div>

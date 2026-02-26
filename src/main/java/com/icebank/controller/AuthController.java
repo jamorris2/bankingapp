@@ -47,10 +47,11 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String registerAccount(@ModelAttribute("accountRequest") AccountRequestDTO dto) {
+    public String registerAccount(@ModelAttribute("accountRequest") AccountRequestDTO dto, Model model) {
 
         if (accountService.findByEmail(dto.getEmail()).isPresent()) {
-            return "redirect:/signup?status=email-exists";
+            model.addAttribute("status", "email-exists");
+            return "signup";
         }
 
         Account account = new Account();
@@ -67,7 +68,8 @@ public class AuthController {
             return "redirect:/login?status=account-created";
         } catch (Exception e) {
             log.error("Registration FAILED for email: {}. Reason: {}", account.getEmail(), e.getMessage(), e);
-            return "redirect:/signup?status=signup-failed";
+            model.addAttribute("status", "signup-failed");
+            return "signup";
         }
     }
 
