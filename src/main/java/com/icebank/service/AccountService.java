@@ -1,23 +1,31 @@
 package com.icebank.service;
 
+import com.icebank.exception.UserAlreadyExistsException;
 import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.repository.AccountRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class AccountService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
@@ -25,6 +33,25 @@ public class AccountService implements UserDetailsService {
 
     public Optional<Account> getAccountById(Long id) {
         return accountRepository.findById(id);
+    }
+
+    @Transactional
+    public Account registerAccount(AccountRequestDTO dto) {
+        if (accountRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException("Email already in use");
+        }
+
+        Account account = new Account();
+        account.setName(dto.getName());
+        account.setEmail(dto.getEmail());
+        account.setPassword(passwordEncoder.encode(dto.getPassword()));
+        String token = UUID.randomUUID().toString();
+        account.setVerificationToken(token);
+
+        Account newAccount = accountRepository.save(account);
+        emailService.sendVerificationEmail(newAccount.getEmail(), newAccount.getVerificationToken());
+        log.info("User successfully registered: {}", newAccount.getEmail());
+        return newAccount;
     }
 
     public Account saveAccount(Account account) {
@@ -58,7 +85,7 @@ public class AccountService implements UserDetailsService {
         return User.builder()
                 .username(account.getEmail())
                 .password(account.getPassword())
-                .disabled(!account.isVerified()) // This prevents unverified users from logging in!
+                .disabled(!account.isVerified()) // This prevents unverified users from logging in
                 .roles("USER")
                 .build();
     }

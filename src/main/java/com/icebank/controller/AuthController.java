@@ -1,5 +1,6 @@
 package com.icebank.controller;
 
+import com.icebank.exception.UserAlreadyExistsException;
 import com.icebank.model.Account;
 import com.icebank.model.AccountRequestDTO;
 import com.icebank.service.AccountService;
@@ -45,26 +46,13 @@ public class AuthController {
 
     @PostMapping("/signup")
     public String registerAccount(@ModelAttribute("accountRequest") AccountRequestDTO dto, Model model) {
-
-        if (accountService.findByEmail(dto.getEmail()).isPresent()) {
+        try {
+            accountService.registerAccount(dto);
+            return "redirect:/login?status=account-created";
+        } catch (UserAlreadyExistsException e) {
             model.addAttribute("status", "email-exists");
             return "signup";
-        }
-
-        Account account = new Account();
-        account.setName(dto.getName());
-        account.setEmail(dto.getEmail());
-        account.setPassword(passwordEncoder.encode(dto.getPassword()));
-        String token = UUID.randomUUID().toString();
-        account.setVerificationToken(token);
-
-        try {
-            emailService.sendVerificationEmail(account.getEmail(), token);
-            accountService.saveAccount(account);
-            log.info("User successfully registered: {}", account.getEmail());
-            return "redirect:/login?status=account-created";
         } catch (Exception e) {
-            log.error("Registration FAILED for email: {}. Reason: {}", account.getEmail(), e.getMessage(), e);
             model.addAttribute("status", "signup-failed");
             return "signup";
         }
